@@ -1,7 +1,7 @@
-package com.example.estoque.controller;
+package com.example.demo.controller;
 
-import com.example.estoque.model.Produto;
-import com.example.estoque.service.ProdutoService;
+import com.example.demo.model.Produto;
+import com.example.demo.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,18 +42,19 @@ public class ProdutoController {
         produtoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-}
-@GetMapping("/nome/{nome}")
-public List<Produto> buscarPorNome(@PathVariable String nome) {
-    return produtoService.buscarPorNome(nome);
-}
 
-@GetMapping("/preco")
-public List<Produto> buscarPorFaixaDePreco(@RequestParam Double minPreco, @RequestParam Double maxPreco) {
-    return produtoService.buscarPorFaixaDePreco(minPreco, maxPreco);
-}
+    @GetMapping("/nome/{nome}")
+    public List<Produto> buscarPorNome(@PathVariable String nome) {
+        return produtoService.buscarPorNome(nome);
+    }
 
-@GetMapping("/estoque/{quantidade}")
-public List<Produto> buscarPorQuantidadeEstoque(@PathVariable Integer quantidade) {
-    return produtoService.buscarPorQuantidadeEstoque(quantidade);
+    @GetMapping("/preco")
+    public List<Produto> buscarPorFaixaDePreco(@RequestParam Double minPreco, @RequestParam Double maxPreco) {
+        return produtoService.buscarPorFaixaDePreco(minPreco, maxPreco);
+    }
+
+    @GetMapping("/estoque/{quantidade}")
+    public List<Produto> buscarPorQuantidadeEstoque(@PathVariable Integer quantidade) {
+        return produtoService.buscarPorQuantidadeEstoque(quantidade);
+    }
 }

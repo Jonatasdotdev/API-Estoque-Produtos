@@ -1,7 +1,7 @@
-package com.example.estoque.service;
+package com.example.demo.service;
 
-import com.example.estoque.model.Produto;
-import com.example.estoque.repository.ProdutoRepository;
+import com.example.demo.model.Produto;
+import com.example.demo.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +30,6 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public List<Produto> buscarPorNome(String nome) {
-        return produtoRepository.findByNomeContaining(nome);
-    }
-
-    public List<Produto> buscarPorFaixaDePreco(Double minPreco, Double maxPreco) {
-        return produtoRepository.findByPrecoBetween(minPreco, maxPreco);
-    }
-
-
     public Produto atualizar(Long id, Produto produtoAtualizado) {
         return produtoRepository.findById(id)
                 .map(produto -> {
@@ -52,5 +43,17 @@ public class ProdutoService {
                     produtoAtualizado.setId(id);
                     return produtoRepository.save(produtoAtualizado);
                 });
+    }
+
+    public List<Produto> buscarPorNome(String nome) {
+        return produtoRepository.findByNomeContaining(nome);
+    }
+
+    public List<Produto> buscarPorFaixaDePreco(Double minPreco, Double maxPreco) {
+        return produtoRepository.findByPrecoBetween(minPreco, maxPreco);
+    }
+
+    public List<Produto> buscarPorQuantidadeEstoque(Integer quantidade) {
+        return produtoRepository.findByQuantidadeEstoqueGreaterThan(quantidade);
     }
 }
